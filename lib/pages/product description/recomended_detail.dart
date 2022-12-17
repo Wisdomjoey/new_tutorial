@@ -14,8 +14,10 @@ import '../../widgets/expandable_text.dart';
 
 class RecommendedDetail extends StatelessWidget {
   final int pageId;
+  final String page;
 
-  const RecommendedDetail({Key? key, required this.pageId}) : super(key: key);
+  const RecommendedDetail({Key? key, required this.pageId, required this.page})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,11 @@ class RecommendedDetail extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(RouteHelper.getInitial());
+                      if (page == 'cartpage') {
+                        Get.toNamed(RouteHelper.getCartPage());
+                      } else {
+                        Get.toNamed(RouteHelper.getInitial());
+                      }
                     },
                     child: const AppIcon(icon: Icons.clear),
                   ),
@@ -46,7 +52,7 @@ class RecommendedDetail extends StatelessWidget {
                   GetBuilder<PopularProdController>(builder: (controller) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.cartPage);
+                        Get.toNamed(RouteHelper.getCartPage());
                       },
                       child: Stack(
                         children: [

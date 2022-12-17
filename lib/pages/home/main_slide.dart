@@ -36,6 +36,7 @@ class _MainSlideState extends State<MainSlide> {
   @override
   void dispose() {
     pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,9 +45,9 @@ class _MainSlideState extends State<MainSlide> {
       children: [
         GetBuilder<PopularProdController>(builder: (products) {
           return products.isLoaded
-            ? (Container(
-                height: Dimensions.pageView,
-                child: PageView.builder(
+              ? (Container(
+                  height: Dimensions.pageView,
+                  child: PageView.builder(
                       controller: pageController,
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
@@ -57,8 +58,7 @@ class _MainSlideState extends State<MainSlide> {
                         return _buildPageItem(
                             position, products.popularProdList[position]);
                       }),
-                )
-              )
+                ))
               : (const CircularProgressIndicator(
                   color: AppColors.mainColor,
                 ));
@@ -116,7 +116,7 @@ class _MainSlideState extends State<MainSlide> {
         children: [
           GestureDetector(
             onTap: () {
-              Get.toNamed(RouteHelper.getPopularFood(position));
+              Get.toNamed(RouteHelper.getPopularFood(position, 'home'));
             },
             child: Container(
               height: Dimensions.pageViewContainer,
@@ -130,8 +130,7 @@ class _MainSlideState extends State<MainSlide> {
                       : const Color(0xFF9294cc),
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(
-                          popularProd.img!))),
+                      image: NetworkImage(popularProd.img!))),
             ),
           ),
           Align(

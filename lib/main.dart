@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_tutproj/data/controllers/popular_prod_controller.dart';
 import 'package:new_tutproj/pages/home/main_page.dart';
+import 'package:new_tutproj/pages/splash/splash_page.dart';
 import 'package:new_tutproj/routes/route_helper.dart';
 
 import 'data/controllers/recommended_prod_controller.dart';
@@ -19,18 +20,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProdController>().getPopularProdList();
-    Get.find<RecommendedProdController>().getRecommendedProdList();
-
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: RouteHelper.initial,
-      getPages: RouteHelper.routes,
-      home: const MainPage(),
+    return GetBuilder<PopularProdController>(
+      builder: (controller) {
+        return GetBuilder<RecommendedProdController>(builder: ((controller) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            initialRoute: RouteHelper.getSplashPage(),
+            getPages: RouteHelper.routes,
+            // home: const SplashScreen(),
+          );
+          ;
+        }));
+      },
     );
   }
 }

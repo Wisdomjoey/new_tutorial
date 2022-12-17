@@ -13,8 +13,10 @@ import '../../widgets/expandable_text.dart';
 
 class ProductDetail extends StatelessWidget {
   final int pageId;
+  final String page;
 
-  const ProductDetail({Key? key, required this.pageId}) : super(key: key);
+  const ProductDetail({Key? key, required this.pageId, required this.page})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +50,18 @@ class ProductDetail extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(RouteHelper.getInitial());
+                      if (page == 'cartpage') {
+                        Get.toNamed(RouteHelper.getCartPage());
+                      } else {
+                        Get.toNamed(RouteHelper.getInitial());
+                      }
                     },
                     child: const AppIcon(icon: Icons.arrow_back_ios),
                   ),
                   GetBuilder<PopularProdController>(builder: (controller) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.cartPage);
+                        Get.toNamed(RouteHelper.getCartPage());
                       },
                       child: Stack(
                         children: [

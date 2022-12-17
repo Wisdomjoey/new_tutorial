@@ -54,7 +54,7 @@ class _ProductsState extends State<Products> {
                         return GestureDetector(
                           onTap: () {
                             print(index);
-                            Get.toNamed(RouteHelper.getRecommendedFood(index));
+                            Get.toNamed(RouteHelper.getRecommendedFood(index, 'home'));
                           },
                           child: Container(
                             margin: EdgeInsets.only(
